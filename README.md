@@ -1,5 +1,5 @@
 
-##########TASK##########
+########## TASK ##########
 Write ToDo web application without server.
 
 Application should provide ability
@@ -21,3 +21,8 @@ Non-Functional Requirements:
 * This task should take no more than 6-8 working hours(it is better to be less).
 
 * Additional plus if test task will be presented as git repository with history of changes. it could be located on github(preffered) or folder with .git metadata.
+
+########## INSTALL ##########
+1) npm install
+2) npm run
+3) go to http://localhost:3000/

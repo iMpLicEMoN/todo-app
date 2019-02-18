@@ -1,6 +1,6 @@
-export const deleteTodoAction = (todo) => {
+export const deleteTodoAction = (id) => {
     return {
         type: 'DELETE_TODO',
-        todo: todo
+        id: id
     }
 }

@@ -1,6 +1,6 @@
-export const markTodoAction = (todo) => {
+export const markTodoAction = (id) => {
     return {
         type: 'MARK_TODO',
-        todo: todo
+        id: id
     }
 }

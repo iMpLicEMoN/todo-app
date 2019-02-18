@@ -10,24 +10,39 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
+
     if (action.type === 'ADD_TODO') {
         return {
+            ...state,
             todoList: [...state.todoList, action.todo]
         }
     }
     if (action.type === 'MARK_TODO') {
+        state.todoList.map((el)=>{
+            if (el.id===action.id){
+                el.done=!el.done
+            }
+            return el
+        })
         return {
-            todoList: [...state.todoList, action.todo]
+            ...state
         }
     }
     if (action.type === 'EDIT_TODO') {
+        state.todoList.map((el)=>{
+            if (el.id===action.id){
+                el=action
+            }
+            return el
+        })
         return {
-            todoList: [...state.todoList, action.todo]
+            ...state
         }
     }
     if (action.type === 'DELETE_TODO') {
+        state.todoList.filter((el)=>!el.id===action.id)
         return {
-            todoList: [...state.todoList, action.todo]
+            ...state
         }
     }
     return {
