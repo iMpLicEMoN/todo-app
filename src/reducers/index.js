@@ -1,5 +1,11 @@
 
 const initState = {
+    todo: {
+        id: '',
+        title: '',
+        text: '',
+        done: false
+    },
     todoList:[]
 }
 

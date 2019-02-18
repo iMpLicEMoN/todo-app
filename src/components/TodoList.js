@@ -6,14 +6,40 @@ import { editTodoAction } from '../actions/editTodoAction'
 
 class TodoList extends Component {
     state = {
+        todo: {
+            id: '',
+            title: '',
+            text: '',
+            done: false
+        },
         todoList: []
     }
 
 
     componentDidMount(){
         this.setState({
+            todo: this.props.todo,
             todoList: this.props.todoList
         })
+    }
+
+    handleEdit = (e)=>{
+        let bufList = this.state.todoList
+        bufList.map((el)=>{
+            if (el.id===e.currentTarget.pointer){
+                this.setState({
+                    ...this.state,
+                    todo: {
+                        id: el.id,
+                        title: el.title,
+                        text: el.text,
+                        done: el.done
+                    }
+                })
+            }
+            return null
+        })
+
     }
 
 
@@ -30,21 +56,25 @@ class TodoList extends Component {
         return (
 
             <div className='TodoList'>
+            <ul>
                 {this.props.todoList && this.props.todoList.sort(sortTodoList).map((el)=>{
                     return(
-                        <div>
-                            <div>
+                        
+                            <li id={el.id} key={el.id} className={el.done ? 'done' : 'not-done'}>
                                 {el.title} 
-                                <button id="done">Done</button> 
-                                <button id="edit">Edit</button> 
-                                <button id="delete">Del</button>
-                            </div>
-                            <div>
-                                {el.text}
-                            </div>
-                        </div>
+                                <button type="done" pointer={el.id}>Done</button> 
+                                <button type="edit" pointer={el.id} onClick={this.handleEdit}>Edit</button> 
+                                <button type="delete" pointer={el.id}>Del</button>
+                                <div>{el.text}</div>
+                                
+                            </li>
+                            
+                                
+                            
+                        
                     )
                 })}
+            </ul>
             </div>
 
         )
@@ -53,6 +83,7 @@ class TodoList extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        todo: state.todo,
         todoList: state.todoList
     }
 }
