@@ -11,18 +11,28 @@ class AddTodo extends Component {
         }
     }
 
+    handleInput = (e)=>{
+        this.setState({...this.state, todo: {...this.state.todo, [e.currentTarget.id]: e.currentTarget.value}})
+        //console.table(this.state)
+    }
+
+    handleSubmit = (e)=>{
+        e.preventDefault()
+        this.props.addTodoAction(this.state.todo)
+    }
+
     render() {
         return (
 
             <div className='AddTodo'>
-                <form type="submit">
+                <form type="submit" onSubmit={this.handleSubmit}>
                 <label>
                     Title: 
-                    <input id="title" className="todo__title-input"></input>
+                    <input id="title" className="todo__title-input" onChange={this.handleInput}></input>
                 </label>
                 <label>
                     Text: 
-                    <input id="text" className="todo__text-input"></input>
+                    <input id="text" className="todo__text-input" onChange={this.handleInput}></input>
                 </label>
                 <button>ADD</button>
                 </form>
@@ -40,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        rmmbrSendedData: (todo) => { dispatch(addTodoAction(todo)) }
+        addTodoAction: (todo) => { dispatch(addTodoAction(todo)) }
     }
 }
 
